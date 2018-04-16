@@ -1,0 +1,14 @@
+{
+  "deviceId":"000003A8BEA7",
+  "checksumRecorded":0,
+  "checksumScheduled":111222333,
+  "hddSpaceExtFree":777777,
+  "hddSpaceExtTotal":9999999,
+  "hddSpaceFreeIn2Weeks":76544,
+  "hddSpaceInternalFree":568657,
+  "hddSpaceInternalTotal":9990000,
+  "lastRequestTime":null,
+  "lastUpdated":1523919122000,
+  "priorityVector":"384000002,384000003",
+  "seriesSchedulerPriorityVector":"18c4e73f-8abb-40ee-9d8d-bbd9d503d61b,4e6e20c0-09c9-411e-af1b-a07283e2d52e"
+}

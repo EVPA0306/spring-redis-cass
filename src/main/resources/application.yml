@@ -1,0 +1,10 @@
+spring:
+  data:
+    cassandra:
+      port: 9142
+      cluster-name: 127.0.0.1
+      keyspace-name: dvr
+  jpa:
+    show-sql: true
+server:
+  port: 7788
