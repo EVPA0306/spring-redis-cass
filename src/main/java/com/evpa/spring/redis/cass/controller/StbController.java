@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/v1")
@@ -21,6 +20,12 @@ public class StbController {
     @PostMapping(value = "/stb", consumes="application/json")
     public ResponseEntity createStb(@Valid @RequestBody Stb stb) {
         service.save(stb);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping(value = "/stbs", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity createStbs(@Valid @RequestBody Iterable<Stb> stbs) {
+        service.saveAll(stbs);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

@@ -2,12 +2,15 @@ package com.evpa.spring.redis.cass.dao;
 
 import org.springframework.data.annotation.Id;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 
-public class Stb {
+public class Stb implements Serializable {
 
-        //private static final long serialVersionUID = -8686093905702041297L;
+        private static final long serialVersionUID = -8686093905702041297L;
+
         @Id
         private String deviceId;
         private long checksumRecorded;
@@ -133,5 +136,48 @@ public class Stb {
 
         public void setSeriesSchedulerPriorityVector(String seriesSchedulerPriorityVector) {
                 this.seriesSchedulerPriorityVector = seriesSchedulerPriorityVector;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+                Stb stb = (Stb) o;
+                return checksumRecorded == stb.checksumRecorded &&
+                        checksumScheduled == stb.checksumScheduled &&
+                        hddSpaceExtFree == stb.hddSpaceExtFree &&
+                        hddSpaceExtTotal == stb.hddSpaceExtTotal &&
+                        hddSpaceFreeIn2Weeks == stb.hddSpaceFreeIn2Weeks &&
+                        hddSpaceInternalFree == stb.hddSpaceInternalFree &&
+                        hddSpaceInternalTotal == stb.hddSpaceInternalTotal &&
+                        Objects.equals(deviceId, stb.deviceId) &&
+                        Objects.equals(lastRequestTime, stb.lastRequestTime) &&
+                        Objects.equals(lastUpdated, stb.lastUpdated) &&
+                        Objects.equals(priorityVector, stb.priorityVector) &&
+                        Objects.equals(seriesSchedulerPriorityVector, stb.seriesSchedulerPriorityVector);
+        }
+
+        @Override
+        public int hashCode() {
+
+                return Objects.hash(deviceId, checksumRecorded, checksumScheduled, hddSpaceExtFree, hddSpaceExtTotal, hddSpaceFreeIn2Weeks, hddSpaceInternalFree, hddSpaceInternalTotal, lastRequestTime, lastUpdated, priorityVector, seriesSchedulerPriorityVector);
+        }
+
+        @Override
+        public String toString() {
+                return "Stb{" +
+                        "deviceId='" + deviceId + '\'' +
+                        ", checksumRecorded=" + checksumRecorded +
+                        ", checksumScheduled=" + checksumScheduled +
+                        ", hddSpaceExtFree=" + hddSpaceExtFree +
+                        ", hddSpaceExtTotal=" + hddSpaceExtTotal +
+                        ", hddSpaceFreeIn2Weeks=" + hddSpaceFreeIn2Weeks +
+                        ", hddSpaceInternalFree=" + hddSpaceInternalFree +
+                        ", hddSpaceInternalTotal=" + hddSpaceInternalTotal +
+                        ", lastRequestTime=" + lastRequestTime +
+                        ", lastUpdated=" + lastUpdated +
+                        ", priorityVector='" + priorityVector + '\'' +
+                        ", seriesSchedulerPriorityVector='" + seriesSchedulerPriorityVector + '\'' +
+                        '}';
         }
 }
