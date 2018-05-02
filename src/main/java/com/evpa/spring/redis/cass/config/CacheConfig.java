@@ -5,17 +5,24 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisClusterConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableCaching
 public class CacheConfig {
+
+    List<String> nodes = Arrays.asList("localhost:10001","localhost:10002","localhost:10003");
+
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+    public RedisTemplate<String, Object> redisTemplate(JedisConnectionFactory jedisConnectionFactory) {
+
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
-        redisTemplate.setConnectionFactory(redisConnectionFactory);
+        redisTemplate.setConnectionFactory(jedisConnectionFactory);
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
@@ -25,10 +32,13 @@ public class CacheConfig {
         return RedisCacheManager.create(jedisConnectionFactory);
     }
 
+
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
-        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
+        RedisClusterConfiguration redisClusterConfiguration = new RedisClusterConfiguration(nodes);
+        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(redisClusterConfiguration);
         jedisConnectionFactory.afterPropertiesSet();
         return jedisConnectionFactory;
     }
+
 }

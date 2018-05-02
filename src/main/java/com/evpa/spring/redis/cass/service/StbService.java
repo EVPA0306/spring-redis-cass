@@ -11,8 +11,15 @@ import java.util.Optional;
 @Component
 public class StbService {
 
-    @Autowired
+
     private StbRepository repository;
+
+    public StbService() {}
+
+    @Autowired
+    public StbService(StbRepository repository) {
+        this.repository = repository;
+    }
 
     @Cacheable("stb")
     public void save(Stb entity) {
