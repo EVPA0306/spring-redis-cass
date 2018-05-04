@@ -6,9 +6,9 @@ spring:
       keyspace-name: dvr
   jpa:
     show-sql: true
-  redis:
-    cluster:
-      nodes: localhost:10001,localhost:10002,localhost:10003
+  #redis:
+  #  cluster:
+  #    nodes: localhost:10001,localhost:10002,localhost:10003
   #cache:
   #  type: redis
   #redis:
