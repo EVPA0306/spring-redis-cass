@@ -16,7 +16,7 @@ import java.util.List;
 @EnableCaching
 public class CacheConfig {
 
-    List<String> nodes = Arrays.asList("localhost:10001","localhost:10002","localhost:10003");
+    List<String> nodes = Arrays.asList("localhost:6379","localhost:6380","localhost:6381");
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(JedisConnectionFactory jedisConnectionFactory) {
@@ -33,10 +33,19 @@ public class CacheConfig {
     }
 
 
-    @Bean
+    /*@Bean FOR CLUSTER
     public JedisConnectionFactory jedisConnectionFactory() {
         RedisClusterConfiguration redisClusterConfiguration = new RedisClusterConfiguration(nodes);
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(redisClusterConfiguration);
+        jedisConnectionFactory.afterPropertiesSet();
+        return jedisConnectionFactory;
+    }*/
+
+    @Bean
+    public JedisConnectionFactory jedisConnectionFactory() {
+        //RedisClusterConfiguration redisClusterConfiguration = new RedisClusterConfiguration(nodes);
+        //JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(redisClusterConfiguration);
+        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
         jedisConnectionFactory.afterPropertiesSet();
         return jedisConnectionFactory;
     }
